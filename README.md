@@ -32,8 +32,3 @@ and visualizes mood trends with interactive **graphs**.
   - `pandas` (data processing)
   - `matplotlib` (charts & visualization)
   - `sqlite3` (database handling)
-
----
-
-## 📂 Project Structure
-
