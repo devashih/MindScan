@@ -140,29 +140,50 @@ else:
         if journal_text.strip() == "" and image is None:
             st.error("Please provide at least text OR an image.")
         else:
+
             # ---------- TEXT ANALYSIS ----------
             emotion = "neutral"
             confidence = 0.5
             stress = 4
 
             if journal_text.strip():
-                results = emotion_model(journal_text)[0]
-                top = max(results, key=lambda x: x["score"])
-                emotion = top["label"]
-                confidence = top["score"]
 
-                severity = assess_text_severity(journal_text)
+                cleaned_text = journal_text.lower().strip()
+
+                results = emotion_model(cleaned_text)
+                emotions = results[0]
+
+                top = max(emotions, key=lambda x: x["score"])
+                emotion = top["label"]
+                confidence = float(top["score"])
+
+                severity = assess_text_severity(cleaned_text)
 
                 if severity == "CRISIS":
                     stress = 9
-                elif severity == "MEDIUM":
-                    stress = 6
-                elif severity == "MILD":
-                    stress = 4
-                else:
-                    stress = 3
 
-            # ---------- IMAGE ANALYSIS (ALWAYS ON) ----------
+                elif severity == "MEDIUM":
+                    stress = 7
+
+                elif severity == "MILD":
+                    stress = 5
+
+                else:
+                    emotion_stress_map = {
+                        "anger": 6,
+                        "sadness": 7,
+                        "fear": 7,
+                        "disgust": 6,
+                        "surprise": 4,
+                        "neutral": 3,
+                        "joy": 2
+                    }
+
+                    stress = emotion_stress_map.get(emotion, 3)
+
+                stress = min(round(stress + confidence * 1.5), 10)
+
+            # ---------- IMAGE ANALYSIS ----------
             if image is not None:
                 _, env_risk = analyze_environment(image)
                 face_emotion, _, face_risk = analyze_facial_emotion(image)

@@ -5,7 +5,7 @@ from email.message import EmailMessage
 # SYSTEM EMAIL (APP EMAIL)
 # -------------------------------------------------
 EMAIL_ADDRESS = "mindscan.alerts@gmail.com"
-EMAIL_PASSWORD = "ttho vvew rdhk pnwr"  # Gmail App Password
+EMAIL_PASSWORD = "cayy eddy wpat jeok"  # Gmail App Password
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
