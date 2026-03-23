@@ -27,7 +27,7 @@ MindScan is an artificial intelligence-driven mental health monitoring system de
   --Alert Mechanism: If negative emotional indicators exceed established thresholds, the system triggers automated alerts or suggestions.
 
 **Benefits of MindScan**
-For Users
+**For Users**
   --Facilitates systematic tracking of emotional well-being.
   --Promotes consistent self-reflection.
   --Provides early-stage indicators for potential mental health concerns.
